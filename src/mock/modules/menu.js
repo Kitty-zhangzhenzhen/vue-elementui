@@ -315,6 +315,21 @@ export function findTreeMenu() {
 									lastUpdateTime: null,
 									delFlag: 0,
 									children: []
+								},
+								{
+									menuId: 513,
+									parentId: 52,
+									title: '图片裁剪',
+									url: '/applicationTwo/imgCropper',
+									MenuCode: 'sys_table_list',
+									type: 1,
+									icon: 'iconfont yh-iconshouye',
+									createBy: null,
+									createTime: null,
+									lastUpdateBy: null,
+									lastUpdateTime: null,
+									delFlag: 0,
+									children: []
 								}
 							]
 						}

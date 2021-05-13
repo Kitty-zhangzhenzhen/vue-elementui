@@ -61,6 +61,14 @@ export default new Router({
             meta: {
               title: 'chartPanel'
             }
+          },
+          {
+            path: '/applicationTwo/imgCropper:path*',
+            component: (resolve) => require(['@/views/applicationTwo/imgCropper/index'], resolve),
+            name: 'imgCropper',
+            meta: {
+              title: 'imgCropper'
+            }
           }
         ]
       },
