@@ -6,7 +6,7 @@
              label-position="left"
              label-width="0px"
              class="demo-ruleForm login-container">
-      <h3 class="title">源慧码平台</h3>
+      <h3 class="title">欢迎登陆</h3>
       <el-form-item prop="account">
         <el-input id="inputId"
                   type="text"

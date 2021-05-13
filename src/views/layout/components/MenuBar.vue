@@ -1,5 +1,6 @@
 <template>
   <div class="menu-bar-container">
+      <div class="logo" :class="collapse ? 'menu-bar-collapse-width' : 'menu-bar-width'"> <div>{{ collapse ? "" : $store.state.app.appName }}</div></div>
     <!-- logo -->
     <!-- <div class="logo" :class="collapse ? 'menu-bar-collapse-width' : 'menu-bar-width'">
       <img :src="this.logo" />

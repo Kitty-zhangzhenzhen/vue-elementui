@@ -285,6 +285,38 @@ export function findTreeMenu() {
 									children: []
 								}
 							]
+						},
+						{
+							menuId: 52,
+							parentId: 488,
+							title: '功能',
+							MenuCode: 'sys_table',
+							url: null,
+							type: 0,
+							icon: 'iconfont yh-iconyewubaobiao',
+							createBy: null,
+							createTime: null,
+							lastUpdateBy: null,
+							lastUpdateTime: null,
+							delFlag: 0,
+
+							children: [
+								{
+									menuId: 512,
+									parentId: 52,
+									title: '计数器',
+									url: '/applicationTwo/chartPanel',
+									MenuCode: 'sys_table_list',
+									type: 1,
+									icon: 'iconfont yh-iconshouye',
+									createBy: null,
+									createTime: null,
+									lastUpdateBy: null,
+									lastUpdateTime: null,
+									delFlag: 0,
+									children: []
+								}
+							]
 						}
 					]
 				}

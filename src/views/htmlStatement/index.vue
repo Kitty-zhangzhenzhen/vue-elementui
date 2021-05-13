@@ -13,11 +13,6 @@
     :element-loading-background="loadingType && 'rgba(0, 0, 0, 0.8)'"
   >
     <div class="page_main">
-      <p class="page_title">
-        前端代码规范
-        <br />
-        <span>(如果不按此规则编写代码，管理员有权要求你重写页面)</span>
-      </p>
       <el-row class="page_item">
         <span style="font-size:16px;font-weight: bolder;">提示：页面开发标准参考页面—— 租户设置>数据管理>商圈管理</span>
       </el-row>
@@ -29,9 +24,7 @@
         2、主颜色蓝色（按钮背景、高亮字体）：#1890ff
         <span class="demo_color" style="background:#1890ff"></span>
       </el-row>
-      <el-row class="page_item">3、页面适配统一使用Element 中的 Layout 布局</el-row>
-      <el-row class="page_item">4、弹框、表单元素、表单验证、和其他组件必须使用Element框架的组件</el-row>
-      <el-row class="page_item">5、全局统一字体 14px，小一号字体12px</el-row>
+     
       <el-row class="page_item">
         6、全局统一字体颜色rgba(0,0,0,.65);，深一点的颜色rgba(0,0,0,.85)
         <span
@@ -149,7 +142,7 @@
       </el-row>
       <el-row class="page_item">
         4、项目的icon来源于iconfont，如果编写代码需要icon，我们要到自己的组件库去找，如果没有你要icon,可以自行加入我们的icon库。更新下面 图1 这个文件夹。
-        需要iconfont的项目账号的可以找张荣荣开权限
+      
       </el-row>
       <el-row class="page_item">
         <img src="@/assets/images/pageDemoSecond.png" alt />

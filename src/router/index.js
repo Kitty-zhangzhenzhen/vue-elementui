@@ -1,132 +1,61 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/views/login/index'
-import Layout from '@/views/layout/index'
-import Index from '@/views/index/index'
-import HtmlStatement from '@/views/htmlStatement/index'
-import Error403 from '@/views/exception/error403'
-import Error404 from '@/views/exception/error404'
-import Error500 from '@/views/exception/error500'
-import Error401 from '@/views/exception/error401'
-import TableManage from '@/views/applicationTwo/tableManage/index'
-import Chart from '@/views/chart'
-
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css'// progress bar style
+import Cookies from "js-cookie"
+import router from './router'
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location) {
   return originalPush.call(this, location).catch(err => err)
 }
+const whiteList = ['/login']// no redirect whitelist
 Vue.use(Router)
-const router = new Router({
-  routes: [
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/',
-      component: Layout,
-      redirect: '/index',
-      children: [
-        {
-          path: '/index',
-          name: 'index',
-          component: Index,
-          meta: {
-            title: '首页'
-          }
-        }
-      ]
-    },
-    {
-      path: '/htmlStatement',
-      component: Layout,
-      hidden: true,
-      children: [
-        {
-          path: '/htmlStatement:path*',
-          component: HtmlStatement,
-          name: 'htmlStatement',
-          meta: {
-            title: '前端编码规范'
-          }
-        }
-      ]
-    },
-    {
-      path: '/applicationTwo',
-      component: Layout,
-      hidden: true,
-      children: [
-        {
-          path: '/applicationTwo/tableManage:path*',
-          component: TableManage,
-          name: 'tableManage',
-          meta: {
-            title: 'Table'
-          }
-        }
-      ]
-    },
-    {
-      path: '/exception',
-      component: Layout,
-      hidden: true,
-      children: [
-        {
-          path: '/exception/error403:path*',
-          component: Error403,
-          name: 'error403',
-          meta: {
-            title: '403'
-          }
-        },
-        {
-          path: '/exception/error401:path*',
-          component: Error401,
-          name: 'Error401',
-          meta: {
-            title: '401'
-          }
-        },
-        {
-          path: '/exception/error404:path*',
-          component: Error404,
-          name: 'error404',
-          meta: {
-            title: '404'
-          }
-        },
-        {
-          path: '/exception/error500:path*',
-          component: Error500,
-          name: 'error500',
-          meta: {
-            title: '500'
-          }
-        }
-      ]
-    },
-    {
-      path: '/Chart',
-      component: Layout,
-      hidden: true,
-      children: [
-        {
-          path: '/Chart/Chart:path*',
-          component: Chart,
-          name: 'Chart',
-          meta: {
-            title: 'Chart'
-          }
-        }
-      ]
-    }
-  ]
-})
+
+
 
 router.beforeEach((to, from, next) => {
-  window.scrollTo(0, 0) // 重置滚动条到底部
-  next()
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  NProgress.start()
+  if (getToken()) {
+    // 已登录且要跳转的页面是登录页
+    if (to.path === '/login') {
+      next({ path: '/' })
+      NProgress.done(true)
+    } else {
+      next()
+      NProgress.done(true)
+      // if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
+      //   store.dispatch('GetInfo').then(() => { // 拉取user_info
+      //     // 动态路由，拉取菜单
+      //     loadMenus(next, to)
+      //   }).catch(() => {
+      //     store.dispatch('LogOut').then(() => {
+      //       location.reload() // 为了重新实例化vue-router对象 避免bug
+      //     })
+      //   })
+      // // 登录时未拉取 菜单，在此处拉取
+      // } else if (store.getters.loadMenus) {
+      //   // 修改成false，防止死循环
+      //   store.dispatch('updateLoadMenus')
+      //   loadMenus(next, to)
+      // } else {
+      //   next()
+      // }
+    }
+  } else {
+    /* has no token*/
+    if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
+      next()
+      NProgress.done(true)
+    } else {
+      next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
+      NProgress.done(true)
+    }
+  }
 })
 export default router
+function getToken(){
+  return Cookies.get('token')
+}
